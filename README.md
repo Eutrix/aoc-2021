@@ -2,6 +2,7 @@
 
 I tried.
 
-- [AoC](https://adventofcode.com)
+Stuff here:
 
+- [AoC](https://adventofcode.com)
 - [Kotlin docs](https://kotlinlang.org/docs/home.html)
