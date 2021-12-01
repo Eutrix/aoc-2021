@@ -18,8 +18,7 @@ fun main() {
         }
         return b
     }
-
-    val input = readInput("Day01").map { it.toInt() }
+    val input = getInput(1,2021).map{ it.toInt() }
     println(part1(input))
     println(part2(input))
 }
