@@ -1,3 +1,5 @@
+import utils.*
+
 fun main() {
     fun part1(input: List<Int>): Int {
         var a = 0
