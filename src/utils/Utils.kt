@@ -34,8 +34,6 @@ fun getInput(day: Int, year: Int): List<String> {
         file.appendText(out)
         return out.split("\n").filter { it.isNotBlank() }
     }
-
-
 }
 
 /**
