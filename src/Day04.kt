@@ -76,7 +76,11 @@ fun main() {
         return unmarkedTotal * lastWinnerNum
     }
 
-    val input = getInput(4,2021)
+    fun String.prepareInput(): List<String> {
+        return this.split("\n")
+    }
+
+    val input = getInput(4,2021).prepareInput()
 
     val numbers = input[0]
         .split(",")

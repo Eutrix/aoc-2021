@@ -8,7 +8,14 @@ fun main() {
     fun part2(input: List<Int>): Int {
         return input.size
     }
-    val input = getInput(1,2021).map{ it.toInt() }
+
+    fun String.prepareInput(): List<Int> {
+        return this.split("\n")
+            .map{ it.toInt() }
+    }
+
+    val input = getInput(1,2021).prepareInput()
+
     println(part1(input))
     println(part2(input))
 }

@@ -9,14 +9,14 @@ import java.security.MessageDigest
 /**
  * Reads lines from the given input txt file.
  */
-fun readInput(name: String) = File("src/input", "$name.txt").readLines()
+fun readInput(name: String) = File("src/input", "$name.txt").readText()
 
-fun getSession() = File(".session").readLines()[0]
+fun getSession() = File(".session").readText().trim()
 
-fun getInput(day: Int, year: Int): List<String> {
+fun getInput(day: Int, year: Int): String {
     if (File("src/input", "$year-$day.txt").exists()) {
         println("Using cached data at src/input/$year-$day.txt")
-        return File("src/input", "$year-$day.txt").readLines()
+        return File("src/input", "$year-$day.txt").readText()
     }
     else {
         println("Downloading and saving input data")
@@ -32,7 +32,7 @@ fun getInput(day: Int, year: Int): List<String> {
         val out = reader.readText()
         val file = File("src/input", "$year-$day.txt")
         file.appendText(out)
-        return out.split("\n").filter { it.isNotBlank() }
+        return out
     }
 }
 

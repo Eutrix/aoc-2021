@@ -46,7 +46,13 @@ fun main() {
         }
         return xpos * depth
     }
-    val input = getInput(2,2021).map{ it.split(" ") }
+
+    fun String.prepareInput(): List<List<String>> {
+        return this.split("\n").filter { it.isNotEmpty() }
+            .map{ it.split(" ") }
+    }
+
+    val input = getInput(2,2021).prepareInput()
     println(part1(input))
     println(part2(input))
 

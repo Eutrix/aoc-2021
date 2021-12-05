@@ -20,7 +20,13 @@ fun main() {
         }
         return b
     }
-    val input = getInput(1,2021).map{ it.toInt() }
+
+    fun String.prepareInput(): List<Int> {
+        return this.split("\n").filter { it.isNotEmpty() }
+            .map{ it.toInt() }
+    }
+
+    val input = getInput(1,2021).prepareInput()
     println(part1(input))
     println(part2(input))
 }

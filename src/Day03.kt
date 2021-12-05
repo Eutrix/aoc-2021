@@ -62,8 +62,11 @@ fun main() {
 
         return o2 * co2
     }
+    fun String.prepareInput(): List<String> {
+        return this.split("\n").filter { it.isNotEmpty() }
+    }
 
-    val input = getInput(3,2021)
+    val input = getInput(3,2021).prepareInput()
     println(part1(input))
     println(part2(input))
 }
