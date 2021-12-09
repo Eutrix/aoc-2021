@@ -11,6 +11,7 @@ fun main() {
 
     fun String.prepareInput(): List<Int> {
         return this.split("\n")
+            .filter { it.isNotEmpty() }
             .map{ it.toInt() }
     }
 
