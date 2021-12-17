@@ -40,3 +40,19 @@ fun getInput(day: Int, year: Int): String {
  * Converts string to md5 hash.
  */
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
+
+/**
+ * 2 Element list into a pair
+ * https://stackoverflow.com/questions/49518438/idiomatic-way-to-convert-a-list-to-a-pair-in-kotlin
+ */
+fun <T> List<T>.toPair(): Pair<T, T> {
+    if (this.size != 2) {
+        throw IllegalArgumentException("List is not of length 2!")
+    }
+    return Pair(this[0], this[1])
+}
+
+fun <T> Sequence<T>.toPair(): Pair<T, T> {
+    val a = this.toList()
+    return a.toPair()
+}
