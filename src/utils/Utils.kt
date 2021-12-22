@@ -56,3 +56,8 @@ fun <T> Sequence<T>.toPair(): Pair<T, T> {
     val a = this.toList()
     return a.toPair()
 }
+
+operator fun <T> List<T>.component6(): T {
+    return get(5)
+}
+// https://github.com/JetBrains/kotlin/blob/0274192241a410b799c84024cdc56ef93731fbc3/libraries/stdlib/common/src/generated/_Collections.kt#L66
