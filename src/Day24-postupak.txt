@@ -1,0 +1,125 @@
+// Brute je bio prespor, 90000000000000 for loopova treba dosta vremena
+
+// Svaki instruction matcha regex
+inp w
+mul x 0
+add x z
+mod x 26
+div z (1|26)
+add x -*\d+
+eql x w
+eql x 0 // not gate (0 -> 1, 1 -> 0)
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y \d+
+mul y x
+add z y
+
+// Samo ovi lineovi se mijenjaju
+inp w
+mul x 0
+add x z
+mod x 26
+div z (1|26) <<<<<<
+add x -*\d+  <<<<<< b = pozitivan ili negativan broj
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y \d+    <<<<<< c = pozitivan broj
+mul y x
+add z y
+
+// X i Y ne prelaze iz jednog "inp w" u drugi, uvijek se vrate na 0
+
+// Ako je b pozitivan, iznad njega ce se z dijelit s 1 (ostaje isti), ako je negativan se z dijeli s 26
+// Svaki pozitivni b je >= 10
+// Ima 7 pozitivnih b i 7 negativnih b
+
+// Svaki "inp w" loop
+    Provjerava ako je w jednak z % 26 + b
+        // Kako je svaki pozitivan b >= 10, ovo ne vrijedi za pozitivne b jer je w element [1,9]
+    Ako je b negativan, z se dijeli s 26
+    Ako je b pozitivan, z = 26*z + w+c
+    // Najveci c je 16, a w ne moze bit >= 10, svaki broj dodan z je manji od 26
+
+// Z treba gledat ko listu brojeva
+- Ako je b pozitivan, z se na kraj dodaje w+c
+- Ako je b negativan, z gubi zadnji broj, a ako (taj broj + b != w) se dodaje w+c na kraj z
+
+- Model number valja ako za svaki negativni b vrijedi (zadnja znamenka z + b == w)
+
+
+b i c su:
+11  7    +
+14  8    +
+10  16   +
+14  8    +
+-8  3    -
+14  12   +
+-11 1    -
+10  8    +
+-6  8    -
+-9  14   -
+12  4    +
+-5  14   -
+-4  15   -
+-9  6    -
+
+To znači da se z mijenja ovako:
+    + w1+7
+    + w2+8
+    + w3+16
+    + w4+8
+    -, mora biti w5 == w4+8 - 8
+    + w6+12
+    -, mora biti w7 == w6+12 - 11
+    + w8+8
+    -, mora biti w9 == w8+8 - 6
+    -, mora biti w10 == w3+16 - 9
+    + w11+4
+    -, mora biti w12 == w11+4 - 5
+    -, mora biti w13 == w2+8 - 4
+    -, mora biti w14 == w1+7 - 9
+
+Iz toga dobivamo: w5 == w4
+                  w7 == w6 + 1
+                  w9 == w8 + 2
+                  w10 == w3 + 7
+                  w12 == w11 - 1
+                  w13 == w2 + 4
+                  w14 == w1 - 2
+
+Zato će najveći broj biti:
+
+ w1 = 9 -> w14 = 7
+ w2 = 5 -> w13 = 9
+ w3 = 2 -> w10 = 9
+ w4 = 9 ->  w5 = 9
+ w6 = 8 ->  w7 = 9
+ w8 = 7 ->  w9 = 9
+w11 = 9 -> w12 = 8
+
+tj. 95299897999897
+
+Najmanji će biti:
+w1 = 3, w14 = 1
+w2 = 1, w13 = 5
+w3 = 1, w10 = 8
+w4 = 1, w5 = 1
+w6 = 1, w7 = 2
+w8 = 1, w9 = 3
+w11 = 2, w12 = 1
+
+tj. 31111121382151
+
